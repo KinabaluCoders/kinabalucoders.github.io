@@ -93,7 +93,7 @@ a:focus {
 }
 
 .navbar-custom .nav li.active {
-    outline: nonte;
+    outline: none;
     background-color: rgba(255,255,255,.3);
 }
 
@@ -121,13 +121,22 @@ a:focus {
         transition: background .5s ease-in-out,padding .5s ease-in-out;
     }
 
+    .navbar .navbar-brand,
+    .navbar .nav a {
+        color:#000000;
+    }
+
     .top-nav-collapse {
         padding: 0;
-        background-color: #000;
+        background-color: #222222;
     }
 
     .navbar-custom.top-nav-collapse {
         border-bottom: 1px solid rgba(255,255,255,.3);
+    }
+
+    .navbar-custom.top-nav-collapse a {
+        color: #fff;
     }
 }
 
@@ -138,8 +147,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
-    background-color: #000;
+    background: #ffffff url(../img/cover-kinabalu.png) no-repeat top center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -157,6 +165,7 @@ a:focus {
 
 .intro .intro-body .intro-text {
     font-size: 18px;
+    color: #444444;
 }
 
 @media(min-width:767px) {
@@ -166,7 +175,7 @@ a:focus {
     }
 
     .intro .intro-body .brand-heading {
-        font-size: 100px;
+        font-size: 150px;
     }
 
     .intro .intro-body .intro-text {
@@ -179,10 +188,10 @@ a:focus {
     height: 70px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #fff;
+    
     border-radius: 35px;
     font-size: 40px;
-    color: #fff;
+    color: #ce0000;
     background: 0 0;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
@@ -192,7 +201,7 @@ a:focus {
 .btn-circle:hover,
 .btn-circle:focus {
     outline: 0;
-    color: #fff;
+    color: #999;
     background: rgba(255,255,255,.1);
 }
 
