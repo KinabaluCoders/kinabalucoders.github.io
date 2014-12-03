@@ -252,12 +252,12 @@ a:focus {
     padding-top: 100px;
 }
 
-.download-section {
+.communities-section {
     width: 100%;
     padding: 50px 0;
-    color: #fff;
-    background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
-    background-color: #000;
+    color: #000;
+    /* background: url(../img/downloads-bg.jpg) no-repeat center center scroll; */
+    background-color: #fff;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -275,7 +275,7 @@ a:focus {
         padding-top: 250px;
     }
 
-    .download-section {
+    .communities-section {
         padding: 100px 0;
     }
 
@@ -360,4 +360,18 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+}
+
+/* added 03/12/2014 */
+#community-list {
+  text-align:left;
+}
+#community-list .row {
+  padding-bottom: 10px;
+}
+#community-list h3 {
+  margin-bottom: 0;
+}
+#community-list p {
+  font-size:98%;
 }
