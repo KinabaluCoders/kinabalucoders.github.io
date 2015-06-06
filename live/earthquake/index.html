@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>Kinabalu Earthquake 2015 Events Feed</title>
+<meta name="google" content="notranslate" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+    var $reference = $("#item-reference");
+    var source_spreadsheet_url = "https://spreadsheets.google.com/feeds/list/1EM4NUbLAEFCYtzbN_-NU08bx0Z2JiSHA2wckdMppfd0/1/public/values?alt=json-in-script&callback=?&_ts=" + (new Date()).getTime()
+
+    function load_latest(){
+        $.getJSON(source_spreadsheet_url, function(data){
+            var records = {};
+            $.each(data.feed.entry, function(i, row){
+                var the_moment = moment(row.gsx$timestamp.$t, "M/D/YYYY HH:mm:ss"); 
+                var uts = the_moment.unix();
+                var sortkey = uts;
+                while(records[sortkey])
+                {
+                    sortkey += "-";
+                }
+                var the_item = {
+                    rawdate     :row.gsx$timestamp.$t,
+                    moment      :the_moment,
+                    nicedt      :the_moment.format("D-M-YYYY, h:mm A"),
+                    body        :row.gsx$eventdescription.$t,
+                    submitter   :row.gsx$eventdescription.$t,
+                    link        :row.gsx$sourcelink.$t
+                };
+                records[sortkey] = the_item;
+            });
+
+            var timestamps = $.map(records, function(element,index) {return index});
+            timestamps = timestamps.sort().reverse();
+
+            $feeditems = $(".feeditems").empty();
+            $.each(timestamps, function(i, timestamp){
+                var record = records[timestamp];
+                var $segment = $reference.clone();
+
+                $segment.removeClass("reference");
+                html = $segment.html();
+                if(html)
+                {
+                    html = html.replace("{rawdate}", record.rawdate);
+                    html = html.replace("{nicedt}", record.nicedt);
+                    html = html.replace("{body}", record.body);
+                    if(record.submitter)
+                    {
+                        record.submitter = "anon";
+                    }
+                    html = html.replace("{submitter}", record.submitter);
+                    html = html.replace(/\{link\}/g, record.link);
+
+                    $segment.html(html);
+                    $segment.appendTo($feeditems);
+                    $segment.show();
+                }
+            });
+        });
+
+        setTimeout(load_latest, 1000 * 180);
+    }
+    load_latest();
+
+});
+</script>
+<style>
+#item-reference
+{
+    display:none;
+}
+</style>
+</head>
+<body>
+    <div class="container">        
+        <section id="livefeed" class="row">
+            <div class="col-xs-12 col-sm-5 pull-right">
+                <h1>Ranau Earthquake 2015 <span class="small">News Feed</span></h1>
+                <p>
+                    This website serves to collect and display news related to current events as they occur.
+                </p>
+                <p>
+                    Please post any news on events related to the Ranau Earthquake of June 2nd 2015. To cut down the noise, a source link is MANDATORY.
+                </p>
+                <p>
+                    We do not guarantee the accuracy of the information presented here, but hope that this will serve as a useful starting point.
+                    We also reserve the right to remove any submission that is uninformative, speculative and/or misleading.
+                </p>
+                <p class="text-right">
+                    <a href="https://docs.google.com/forms/d/11t-If12XOAeF-t6iHNwX0Rr1tyzyZjyw1tjWrTdeATg/viewform" class="btn btn-info" role="button">
+                        Submit Update (Google Form)
+                    </a><br />
+                    <a href="https://docs.google.com/spreadsheets/d/1EM4NUbLAEFCYtzbN_-NU08bx0Z2JiSHA2wckdMppfd0/pubhtml">raw datasource</a>
+                </p>
+                <hr />
+                <p class="text-center small">
+                    we are:
+                        <a href="http://kinabalucoders.org">KinabaluCoders.org</a> and 
+                        <a href="https://plus.google.com/107694655781152986735/">KK Smart Space</a><br />
+                    <a href="https://github.com/KinabaluCoders/kinabalucoders.github.io">source and docs</a><br />
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-7 feeditems">
+            </div>
+            <div id="item-reference">
+                <h4>Submitted: {nicedt}</h4>
+                <p>
+                    {body} 
+                </p>
+                <p class="small text-right">
+                    <a href="{link}">{link}</a><br />
+                    submitter: {submitter}
+                </p>
+                <hr />
+            </div>
+        </section>
+    </div>
+</body>
+</html>
