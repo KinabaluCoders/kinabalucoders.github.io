@@ -38,7 +38,7 @@ a {
   float: left;
   height: 100%;
   position: relative;
-  overflow-y: auto; /*auto*/
+  overflow-y: auto; /*scroll*/
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
