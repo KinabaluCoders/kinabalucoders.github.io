@@ -36,10 +36,11 @@ a {
   background-color: #212F3C;
   color: #ffffff;
   float: left;
-  height:100%;
-  position:relative;
-  overflow-y:auto;
-  overflow-x:hidden;
+  height: 100%;
+  position: relative;
+  overflow-y: auto; /*auto*/
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 #main {
