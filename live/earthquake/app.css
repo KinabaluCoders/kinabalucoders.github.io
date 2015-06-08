@@ -1,0 +1,193 @@
+/*
+Flat UI (https://color.adobe.com/Flat-UI-color-theme-2469224/)
+
+[reff]
+  dark:       #2C3E50;
+  red:        #E74C3C;
+  light:      #ECF0F1;
+  light-blue: #3498DB;
+  blue:       #2980B9;
+*/
+
+
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700);
+
+body * {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+body,html,.row-offcanvas {
+  height:100%;
+  background-color: #f9f9f9;
+}
+
+a {
+  color: #1F5478;
+}
+
+/*
+ * Holders
+ * --------------------------------------------------
+ */
+#sidebar {
+  width: inherit;
+  min-width: 220px;
+  max-width: 220px;
+  background-color: #212F3C;
+  color: #ffffff;
+  float: left;
+  height:100%;
+  position:relative;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+#main {
+  height:100%;
+  overflow:auto;
+}
+
+
+/*
+ * Styles
+ * --------------------------------------------------
+ */
+#sidebar .us {
+  font-size: .9em;
+  margin-top: 20px;
+  padding: 15px 10px;
+  text-align: center;
+  border-top: 1px solid #1D2835;
+  color: #555555;
+}
+
+#sidebar .us p {
+  margin-bottom: 8px;
+}
+
+#sidebar .us a {
+  color: #707070;
+}
+
+#sidebar h1 {
+  font-size: 2em;
+  line-height: 1.2em;
+  padding-bottom: 15px;
+  font-weight: 400;    
+}
+
+#sidebar h1 > a {
+  color: #efefef;
+}
+
+#sidebar h1 > a:hover {
+  text-decoration: none;
+}
+
+#sidebar h1 > a small { 
+  display:block; 
+  color: #E74C3C; 
+  padding-top: 5px;
+  font-size: .6em;
+}
+
+#sidebar h1 > a span { 
+  display:block; 
+  color: #3498DB;
+  padding-top: px;
+  font-size: .5em;
+}
+
+#sidebar blockquote {
+  font-size: .85em;
+  color: #aaaaaa;
+  border-left: 1px solid #555555;
+  padding: 0 0 0 10px;
+}
+
+#sidebar p {
+  font-size: .95em;
+  color: #dddddd;
+  line-height: 1.5em;
+}
+
+#main h2.title {
+  color: #555555;
+  height: 60px;
+  line-height: 60px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#main h4.title {
+  color: #666666;
+  font-size: 1.5em;
+  height: 60px;
+  line-height: 70px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#main .card {
+  background: #ffffff;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+#main .card:hover {
+  background: #fcfcfc;
+}
+
+#main .card h5 {
+  color: #2980B9;
+}
+
+#main .card i {
+  margin-right: 10px;
+}
+
+#main .card a {
+  color: #E74C3C;
+}
+
+
+.cta {
+  margin: 15px auto;
+  padding: 12px 10px;
+  border-bottom: 4px solid #398439;
+}
+
+
+
+
+/*
+ * off Canvas sidebar
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    width:calc(100% + 220px);
+  }
+    
+  .row-offcanvas-left
+  {
+    left: -220px;
+  }
+
+  .row-offcanvas-left.active {
+    left: 0;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+  }
+}
+
+#item-reference { display:none; }
