@@ -1,226 +1,175 @@
 <html>
 <head>
-<title>Kinabalu Earthquake 2015 Events Feed</title>
-<meta name="google" content="notranslate" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($){
-
-    var $reference = $("#item-reference");
-    var source_spreadsheet_url = "https://spreadsheets.google.com/feeds/list/1EM4NUbLAEFCYtzbN_-NU08bx0Z2JiSHA2wckdMppfd0/1/public/values?alt=json-in-script&callback=?&_ts=" + (new Date()).getTime()
-
-    function load_latest(){
-        $.getJSON(source_spreadsheet_url, function(data){
-            var records = {};
-            $.each(data.feed.entry, function(i, row){
-                var the_moment = moment(row.gsx$timestamp.$t, "M/D/YYYY HH:mm:ss"); 
-                var uts = the_moment.unix();
-                var sortkey = uts;
-                while(records[sortkey])
-                {
-                    sortkey += "-";
-                }
-                var the_item = {
-                    rawdate     :row.gsx$timestamp.$t,
-                    moment      :the_moment,
-                    nicedt      :the_moment.format("D-M-YYYY, h:mm A"),
-                    body        :row.gsx$eventdescription.$t,
-                    submitter   :row.gsx$submittersname.$t,
-                    link        :row.gsx$sourcelink.$t
-                };
-                records[sortkey] = the_item;
-            });
-
-            var timestamps = $.map(records, function(element,index) {return index});
-            timestamps = timestamps.sort().reverse();
-
-            $feeditems = $(".feeditems").empty();
-            $.each(timestamps, function(i, timestamp){
-                var record = records[timestamp];
-                var $segment = $reference.clone();
-
-                $segment.removeClass("reference");
-                html = $segment.html();
-                if(html)
-                {
-                    html = html.replace("{rawdate}", record.rawdate);
-                    html = html.replace("{nicedt}", record.nicedt);
-                    html = html.replace("{body}", record.body);
-                    if(!record.submitter)
-                    {
-                        record.submitter = "anon";
-                    }
-                    html = html.replace("{submitter}", record.submitter);
-                    html = html.replace(/\{link\}/g, record.link);
-
-                    $segment.html(html);
-                    $segment.appendTo($feeditems);
-                    $segment.show();
-                }
-            });
-        });
-
-        setTimeout(load_latest, 1000 * 180);
-    }
-    load_latest();
-
-});
-</script>
-<style>
-#item-reference
-{
-    display:none;
-}
-</style>
+    <title>Ranau Earthquake, June 5th 2015 (News Feeds)</title>
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="../../font-awesome-4.2.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="app.js"></script>
 </head>
+
 <body>
-    <div class="container">        
-        <section id="livefeed" class="row">
-            <div class="col-xs-12 col-sm-5 pull-right">
-                <h1>Ranau Earthquake 2015 <span class="small">News Feed</span></h1>
-                <p>
-                    This website serves to collect and display news related to current events as they occur.
-                </p>
-                <p>
-                    Please post any news on events related to the Ranau Earthquake of June 2nd 2015. To cut down the noise, a source link is MANDATORY.
-                </p>
-                <p>
-                    We do not guarantee the accuracy of the information presented here, but hope that this will serve as a useful starting point.
-                    We also reserve the right to remove any submission that is uninformative, speculative and/or misleading.
-                </p>
-                <p class="text-right">
-                    <a href="https://docs.google.com/forms/d/11t-If12XOAeF-t6iHNwX0Rr1tyzyZjyw1tjWrTdeATg/viewform" class="btn btn-info" role="button">
-                        Submit Update (Google Form)
-                    </a><br />
-                    <a href="https://docs.google.com/spreadsheets/d/1EM4NUbLAEFCYtzbN_-NU08bx0Z2JiSHA2wckdMppfd0/pubhtml">raw datasource</a>
-                </p>
-                <hr />
-                <h2>Links to donation efforts</h2>
-                
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Sabah Parks</div>
-                    <div class="panel-body">
-                    <ul>
-                        <li>
-                            Details : 
-                            <a href="https://www.facebook.com/122393837931233/photos/a.136791319824818.1073741845.122393837931233/346007475569867/?type=1">
-                                Sabah Parks Facebook post
-                            </a>
-                        </li>
-                        <li>
-                            <em>
-                                Bantuan diperlukan: 
-                                    air bersih (mineral water / drinking water), 
-                                    makanan (food) dan 
-                                    segala barang keperluan untuk petugas-petugas, sukarelawan dan mangsa 
-                                    (other necessities for those on duty, volunteers and victims)
-                            </em>
-                        </li>
-                        <li>Contact Sabah Parks for more info: 088-889103</li>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Kinabalu Quake Disaster Relief Fund</div>
-                    <div class="panel-body">
-                    <ul>
-                        <li>Sabah Social Services Council</li>
-                        <li>
-                            Details:
-                            <ul>
-                                <li>
-                                    <a href="http://www.nst.com.my/node/87314">New Straits Times</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.thestar.com.my/News/Nation/2015/06/07/fund-aid-guides/">The STAR ONLINE</a>
-                                </li>
-                                <li>
-                                    Mentioned in <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Alliance Account No: 101960010086060</li>
-                        <li>Contact 088-221194 for more information</li>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading">RAISING FUNDS FOR ROBBI SAPINGGI'S FAMILY</div>
-                    <div class="panel-body">
-                    <ul>
-                        <li>Details : <a href="https://www.facebook.com/amazingborneo/posts/894150023961216">Amazing Borneo's Facebook post</a></li>
-                        <li>Donation is via Indigogo Project <a href="http://igg.me/at/l9rHBfbVAWs/x">http://igg.me/at/l9rHBfbVAWs/x</a></li>
-                        <li>Contact Amazing Borneo for more info</li>
-                        <li><a href="http://www.amazing-borneo.com/">Amazing Borneo website</a></li>
-                        <li><a href="https://www.facebook.com/amazingborneo">Amazing Borneo Facebook Page</a></li>
-                    </div>
-                </div>
-                
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Persatuan Malim Gunung Kinabalu Ranau Sabah (Pemangkina)</div>
-                    <div class="panel-body">
-                    <ul>
-                        <li>CIMB Account No : 8005609923 </li>
-                        <li>
-                            Details:
-                            <ul>
-                                <li>
-                                    <a href="https://www.facebook.com/hanna.saidin/posts/10153374150882520">Hanna Saidin's Facebook post</a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com/llen.mait/posts/10155618893215640">Reynilda Nell Tiam Sinusun's Facebook post</a>
-                                </li>
-                                <li>
-                                    Mentioned in <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.thestar.com.my/News/Nation/2015/06/07/Sabah-quake-guides-livelihood">The STAR ONLINE</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            Contacts:
-                            <ul>
-                                <li>
-                                    Contact the President of Mountain Guide Association (Kinabalu), Mr Richard Saibeh/Soibi: +60198083349.
-                                    (From 
-                                        <a href="https://www.facebook.com/llen.mait/posts/10155618893215640">Reynilda Nell Tiam Sinusun's Facebook post</a>, 
-                                        <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a> &amp; 
-                                        <a href="http://www.thestar.com.my/News/Nation/2015/06/07/Sabah-quake-guides-livelihood">The STAR ONLINE</a> articles)
-                                </li>
-                                <li>
-                                    Alternatively email : anthoniuspsani@gmail.com - email transaction slip here, SMS +60193087544 once you have deposited the funds to the account
-                                    (From <a href="https://www.facebook.com/hanna.saidin/posts/10153374150882520">Hanna Saidin's Facebook post</a>)
-                                </li>
-                            </ul>
-                        </li>
-                    </div>
-                </div>
-                
-                <hr />
-                <p class="text-center small">
-                    we are:
-                        <a href="http://kinabalucoders.org">KinabaluCoders.org</a> and 
-                        <a href="https://plus.google.com/107694655781152986735/">KK Smart Space</a><br />
-                    <a href="https://github.com/KinabaluCoders/kinabalucoders.github.io">source and docs</a><br />
-                </p>
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <h1><a href="#news">
+                Ranau<br>
+                Earthquake
+                <small>June 5th, 2015</small>
+                <span>#SabahEarthQuake</span>
+                </a>
+            </h1>
+            <blockquote>This website serves to collect and display news related to current events as they occur.</blockquote>                
+            <p>Please post any news on events related to the Ranau Earthquake of June 5th 2015. To cut down the noise, a source link is MANDATORY.</p>
+            <p class="text-center">
+                <a href="https://docs.google.com/forms/d/11t-If12XOAeF-t6iHNwX0Rr1tyzyZjyw1tjWrTdeATg/viewform" class="btn btn-success btn-block cta" role="button" target="_blank"><strong>Submit News</strong><br>(Google Form)</a>
+                <a href="https://docs.google.com/spreadsheets/d/1EM4NUbLAEFCYtzbN_-NU08bx0Z2JiSHA2wckdMppfd0/pubhtml" class="btn btn-block btn-xs" style="margin-top:8px;" target="_blank">raw datasource</a>
+            </p>
+            <p>We do not guarantee the accuracy of the information presented here, but hope that this will serve as a useful starting point.
+            We also reserve the right to remove any submission that is uninformative, speculative and/or misleading.</p>
+            <div class="us">
+                <p>We are:</p>
+                <p><a href="http://kinabalucoders.org">KinabaluCoders.org</a></p>
+                <p><a href="https://plus.google.com/107694655781152986735/">KK Smart Space</a> &nbsp;&nbsp;&nbsp;
+                    <a href="https://github.com/KinabaluCoders/kinabalucoders.github.io"><i class="fa fa-github"></i></a></p>
             </div>
-            <div class="col-xs-12 col-sm-7 feeditems">
-            </div>
-            <div id="item-reference">
-                <h4>Submitted: {nicedt}</h4>
-                <p>
-                    {body} 
-                </p>
-                <p class="small text-right" style="overflow:hidden;">
-                    <a href="{link}">{link}</a><br />
-                    submitter: {submitter}
-                </p>
-                <hr />
-            </div>
-        </section>
+        </div>
     </div>
+  
+    <div id="main">
+        <!-- FEEDS -->
+        <article class="col-md-8">
+            <a name="news"></a>
+            <h2 class="title clearfix">
+                <button type="button" class="btn btn-default navbar-toggle pull-left visible-xs" data-toggle="offcanvas"><i class="fa fa-bars" style="margin:5px;"></i></button>
+                <span class="pull-left">News Feeds&nbsp;</span> <span class="visible-xs visible-sm">/ <a href="#donate">Donations</a></span>
+            </h2>
+
+            <div id="livefeed" class="row">
+                <div class="col-xs-12 col-sm-12 feeditems"></div>
+
+                <div class="card" id="item-reference">
+                    <h5 class="clearfix"><i class="fa fa-calendar"></i> {nicedt} <small class="pull-right">submitter: {submitter}</small></h5>
+                    <p style="font-size:1.2em;">{body}</p>
+                    <p class="small text-right" style="overflow:hidden;">
+                        <a href="{link}" target="_blank">{link}</a>
+                    </p>
+                    <!-- <hr /> -->
+                </div>
+            </div>
+        </article>
+
+        <!-- DONATIONS -->
+        <div class="col-md-4">
+            <a name="donate"></a>
+            <h4 class="title clearfix">
+                <button type="button" class="btn btn-default navbar-toggle pull-left visible-xs" data-toggle="offcanvas"><i class="fa fa-bars" style="margin:5px;"></i></button>
+                <span class="pull-left">Links to donation efforts:</span>
+            </h4>
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">Sabah Parks</div>
+                <div class="panel-body">
+                <ul>
+                    <li>
+                        Details : 
+                        <a href="https://www.facebook.com/122393837931233/photos/a.136791319824818.1073741845.122393837931233/346007475569867/?type=1">
+                            Sabah Parks Facebook post
+                        </a>
+                    </li>
+                    <li>
+                        <em>
+                            Bantuan diperlukan: 
+                                air bersih (mineral water / drinking water), 
+                                makanan (food) dan 
+                                segala barang keperluan untuk petugas-petugas, sukarelawan dan mangsa 
+                                (other necessities for those on duty, volunteers and victims)
+                        </em>
+                    </li>
+                    <li>Contact Sabah Parks for more info: 088-889103</li>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Kinabalu Quake Disaster Relief Fund</div>
+                <div class="panel-body">
+                <ul>
+                    <li>Sabah Social Services Council</li>
+                    <li>
+                        Details:
+                        <ul>
+                            <li>
+                                <a href="http://www.nst.com.my/node/87314">New Straits Times</a>
+                            </li>
+                            <li>
+                                <a href="http://www.thestar.com.my/News/Nation/2015/06/07/fund-aid-guides/">The STAR ONLINE</a>
+                            </li>
+                            <li>
+                                Mentioned in <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Alliance Account No: 101960010086060</li>
+                    <li>Contact 088-221194 for more information</li>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">RAISING FUNDS FOR ROBBI SAPINGGI'S FAMILY</div>
+                <div class="panel-body">
+                <ul>
+                    <li>Details : <a href="https://www.facebook.com/amazingborneo/posts/894150023961216">Amazing Borneo's Facebook post</a></li>
+                    <li>Donation is via Indigogo Project <a href="http://igg.me/at/l9rHBfbVAWs/x">http://igg.me/at/l9rHBfbVAWs/x</a></li>
+                    <li>Contact Amazing Borneo for more info</li>
+                    <li><a href="http://www.amazing-borneo.com/">Amazing Borneo website</a></li>
+                    <li><a href="https://www.facebook.com/amazingborneo">Amazing Borneo Facebook Page</a></li>
+                </div>
+            </div>
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">Persatuan Malim Gunung Kinabalu Ranau Sabah (Pemangkina)</div>
+                <div class="panel-body">
+                <ul>
+                    <li>CIMB Account No : 8005609923 </li>
+                    <li>
+                        Details:
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/hanna.saidin/posts/10153374150882520">Hanna Saidin's Facebook post</a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/llen.mait/posts/10155618893215640">Reynilda Nell Tiam Sinusun's Facebook post</a>
+                            </li>
+                            <li>
+                                Mentioned in <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a>
+                            </li>
+                            <li>
+                                <a href="http://www.thestar.com.my/News/Nation/2015/06/07/Sabah-quake-guides-livelihood">The STAR ONLINE</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Contacts:
+                        <ul>
+                            <li>
+                                Contact the President of Mountain Guide Association (Kinabalu), Mr Richard Saibeh/Soibi: +60198083349.
+                                (From 
+                                    <a href="https://www.facebook.com/llen.mait/posts/10155618893215640">Reynilda Nell Tiam Sinusun's Facebook post</a>, 
+                                    <a href="http://www.mysinchew.com/node/109693?tid=4">Sin Chew Jit Poh</a> &amp; 
+                                    <a href="http://www.thestar.com.my/News/Nation/2015/06/07/Sabah-quake-guides-livelihood">The STAR ONLINE</a> articles)
+                            </li>
+                            <li>
+                                Alternatively email : anthoniuspsani@gmail.com - email transaction slip here, SMS +60193087544 once you have deposited the funds to the account
+                                (From <a href="https://www.facebook.com/hanna.saidin/posts/10153374150882520">Hanna Saidin's Facebook post</a>)
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </div>
+        </div>            
+    </div>
+</div>
 </body>
 </html>
