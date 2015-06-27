@@ -176,3 +176,27 @@ function init() {
         icon: image
     });
 }
+
+jQuery(document).ready(function($){
+    $("#slack-autoinvite").submit(function() {
+        var url = "http://slack.sabah.io/team-invite.php?RETURN=jsonp&callback=?";
+        $.ajax({
+            dataType: "jsonp",
+            url: url,
+            data: $("#slack-autoinvite").serialize(),
+            success: function(data)
+            {
+                if(data.ok)
+                {
+                    alert("Thank you! You should receive an invite in your email shortly.");
+                    $("#slack-autoinvite").find("[type=email]").val("");
+                }
+                else
+                {
+                    alert("Whoops, something went wrong! Please try again in a few minutes...");
+                }
+            }
+        });
+        return false; // avoid to execute the actual submit of the form.
+    });
+});

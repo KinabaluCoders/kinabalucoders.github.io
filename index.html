@@ -28,7 +28,7 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <div style="position:fixed; top: 0; left:0; padding:5px; background:#ffeaea; z-index:9999; border:3px dashed black; border-top:0; border-left:0;">
+    <div style="display:none; position:fixed; top: 0; left:0; padding:5px; background:#ffeaea; z-index:9999; border:3px dashed black; border-top:0; border-left:0;">
         <a href="http://kinabalucoders.org/live/earthquake">Ranau Earthquake 2015 News Feed</a>
     </div>
 
@@ -265,8 +265,15 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Join Kinabalu Coders</h2>
                 <p>Come to any of our supported open community activities, and you're in! Feel free to email us to provide some feedback, give us suggestions, or just say hello!</p>
-                <p><a href="mailto:hello@kinabalucoders.org">hello@kinabalucoders.org</a>
+                <p><a href="mailto:hello@kinabalucoders.org">hello@kinabalucoders.org</a></p>
+                <p>
+                    You can also join us on our <a href="https://slack.com/">Slack</a> server to talk to the community, learn from others, and showcase your own work and projects!
+                    Enter your email below, and we will send you an invite!
                 </p>
+                <form method="post" action="#" id="slack-autoinvite">
+                    <input type="email" name="invite_email" value="" placeholder="Your Email" required />
+                    <input type="submit" class="btn btn-default" value="Invite Me!" />
+                </form>
             </div>
         </div>
     </section>

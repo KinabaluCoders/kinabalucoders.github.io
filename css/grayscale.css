@@ -392,3 +392,8 @@ body {
 #community-list .img-circle {
   margin-right: 10px;
 }
+
+#slack-autoinvite input[type=email]
+{
+    color: black;
+}
