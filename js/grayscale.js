@@ -178,23 +178,81 @@ function init() {
 }
 
 jQuery(document).ready(function($){
-    $("#slack-autoinvite").submit(function() {
+    var $form = $("#slack-autoinvite");
+    var $response = $("#slack-response");
+
+    function reveal_invite()
+    {
+        $form.slideDown();
+        $response.slideUp();
+    }
+
+    reveal_invite();
+
+    function update_response(html)
+    {
+        $response.html(html);
+        $response.find(".reveal").click(function(e){
+            reveal_invite();
+            return false;
+        });
+    }
+
+    $form.submit(function()
+    {
         var url = "http://slack.sabah.io/team-invite.php?RETURN=jsonp&callback=?";
         $.ajax({
             dataType: "jsonp",
             url: url,
             data: $("#slack-autoinvite").serialize(),
+            beforeSend:function()
+            {
+                $form.find("input").prop("disabled", true);
+                $form.slideUp();
+                $response.text("Give us a moment...").slideDown();
+            },
             success: function(data)
             {
                 if(data.ok)
                 {
-                    alert("Thank you! You should receive an invite in your email shortly.");
-                    $("#slack-autoinvite").find("[type=email]").val("");
+                    update_response('Thank you! An invitation has been sent. <a href="#" class="reveal">Invite others!</a>');
+                    $form.find("[type=email]").val("");
                 }
                 else
                 {
-                    alert("Whoops, something went wrong! Please try again in a few minutes...");
+                    if(data.error)
+                    {
+                        switch(data.error)
+                        {
+                            case "already_in_team":
+                                update_response('You are already in the Slack team! <a href="#" class="reveal">Invite others!</a>');
+                                $form.find("[type=email]").val("");
+                                break;
+                            case "already_invited":
+                                update_response('Invitation already sent. <a href="#" class="reveal">Perhaps another email?</a>');
+                                $form.find("[type=email]").val("");
+                                break;
+                            case "invalid_email":
+                                update_response('Whoaaahhh! That email looks invalid. <a href="#" class="reveal">Try retyping it?</a>');
+                                $form.find("[type=email]").val("");
+                                break;
+                            default:
+                                update_response('Unrecognised error! Something about "' + data.error + '" <a href="#" class="reveal">Try again?</a>');
+                        }
+                    }
+                    else
+                    {
+                        update_response('The server returned an invalid response. <a href="#" class="reveal">Please try again.</a>');
+                    }
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                update_response('Whoops! Something went wrong. <a href="#" class="reveal">Please try again.</a>');
+            },
+            complete: function()
+            {
+                $form.find("input").prop("disabled", false);
             }
         });
         return false; // avoid to execute the actual submit of the form.
