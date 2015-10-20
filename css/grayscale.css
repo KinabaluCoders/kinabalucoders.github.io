@@ -419,6 +419,10 @@ body {
 #mini-title
 {
     opacity: 0.0;
+
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .top-nav-collapse #mini-title
