@@ -147,11 +147,10 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: #ffffff url(../img/cover-kinabalu.png) no-repeat top center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    background: #ffffff url(../img/background.mountain.jpg) no-repeat center 10% scroll;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
 }
 
 .intro .intro-body {
@@ -160,7 +159,22 @@ a:focus {
 }
 
 .intro .intro-body .brand-heading {
-    font-size: 40px;
+    /* default for small width devices, usually mobile and in portrait mode */
+    font-size:0px;
+    color:transparent;
+
+    background: url(../img/logo.kinabalu-coders.png) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-size: contain;
+
+    margin-bottom:0px;
+    height:150px;
+
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+
 }
 
 .intro .intro-body .intro-text {
@@ -169,13 +183,18 @@ a:focus {
 }
 
 @media(min-width:767px) {
+    /* larger-width devices */
     .intro {
         height: 100%;
         padding: 0;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
     }
 
     .intro .intro-body .brand-heading {
-        font-size: 150px;
+        margin-top:150px;
+        height:219px;
     }
 
     .intro .intro-body .intro-text {
@@ -270,7 +289,6 @@ a:focus {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;
 }
 
 #map {
@@ -396,4 +414,14 @@ body {
 #slack-autoinvite input[type=email]
 {
     color: black;
+}
+
+#mini-title
+{
+    opacity: 0.0;
+}
+
+.top-nav-collapse #mini-title
+{
+    opacity: 1.0;
 }
