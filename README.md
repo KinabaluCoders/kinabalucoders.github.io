@@ -1,3 +1,7 @@
+The contents of this repository is OBSOLETE - we have migrated our website and content to Drupal 7. The actual site source code is now hosted at [gitlab.sabah.io](https://gitlab.sabah.io) - a git hosting service that we maintain for our local communities. [kinabalucoders.github.io](http://kinabalucoders.github.io) will be kept online and maintained for historical reasons. To visit our new website, please visit [kinabalucoders.org](https://kinabalucoders.org).
+
+---
+
 **Kinabalu Coders** is a nickname for our more lengthy official name: *Persatuan Pengaturcara dan Pembina ICT Sabah (Sabah Coders and ICT Builders Association)*. An officially registered entity with the Malaysian Registrar of Societies in May 2014, we are run by a coalition of leads, organisers, and active participants of the open technology communities and technology-based development industries in Sabah. Kinabalu Coders provides a platform for open communities to engage together, with little constrain on formalities that many non-registered groups often face.
 
 Our main goal is to increase the socio-economic standard of local communities using ICT and computerised applications. We also drive social awareness and expose up-to-date creative and innovative concepts conceived from the IT world; and strive to improve the overall proficiency of our local developer community.
